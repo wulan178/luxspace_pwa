@@ -50,7 +50,7 @@ registerRoute(
 // precache, in this case same-origin .png requests like those from in public/
 registerRoute(
     // Add in any other file extensions or routing criteria as needed.
-    ({ url }) => url.origin === self.location.origin && /\.(jpe?g |png|svg|ico)$/i.test(url.pathname), // Customize this strategy as needed, e.g., by changing to CacheFirst.
+    ({ url }) => url.origin === self.location.origin && /\.(jpe?g|png|svg|ico)$/i.test(url.pathname), // Customize this strategy as needed, e.g., by changing to CacheFirst.
     new StaleWhileRevalidate({
         cacheName: "images",
         plugins: [
@@ -71,6 +71,27 @@ registerRoute(
                 maxEntries: 30,
             }),
         ],
+    })
+);
+
+registerRoute(
+    ({ url }) => url.origin.includes("bwacharity.fly.dev"),
+    new NetworkFirst({
+        cacheName: "apiData",
+        plugins: [
+            new ExpirationPlugin({
+                maxAgeSeconds: 360,
+                maxEntries: 30,
+            }),
+        ],
+    })
+);
+
+registerRoute(
+    ({ url }) => /\.(jpe?g|png)$/i.test(url.pathname),
+    new StaleWhileRevalidate({
+        cacheName: "apiImages",
+        plugins: [new ExpirationPlugin({ maxEntries: 30 })],
     })
 );
 
