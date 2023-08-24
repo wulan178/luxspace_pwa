@@ -6,10 +6,11 @@ function App() {
 
     useEffect(() => {
         (async function () {
-            const response = await fetch("https://bwacharity.fly.dev/items", {
+            const apiUrl = process.env.REACT_APP_API_URL;
+            const response = await fetch(`${apiUrl}/items`, {
                 headers: {
                     "Content-Type": "application/json",
-                    "accept": "application/json",
+                    accept: "application/json",
                 },
             });
             const { nodes } = await response.json();
