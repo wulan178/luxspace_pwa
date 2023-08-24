@@ -15,7 +15,9 @@ export default function Arrived({ items }) {
             <div className="overflow-x-hidden px-4" id="carousel">
                 <div className="container mx-auto"></div>
                 {/* <div className="overflow-hidden z-10">  */}
-                <div className="flex -mx-4 flex-row relative">{items && items.map((item) => <ArrivedItem key={item.id} item={item} />)}</div>
+                <div className="flex -mx-4 flex-row relative">
+                    {items && items.map((item) => <ArrivedItem key={item.id} item={item} />)}
+                </div>
             </div>
             {/* </div> */}
         </section>

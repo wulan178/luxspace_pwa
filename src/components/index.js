@@ -6,6 +6,7 @@ import Clients from "./Clients";
 import Header from "./Header";
 import Hero from "./Hero";
 import Modal from "./Modal";
+import Offline from "./Offline";
 
-export { Arrived, ArrivedItem, AsideMenu, Browser, Clients, Header, Hero, Modal };
+export { Arrived, ArrivedItem, AsideMenu, Browser, Clients, Header, Hero, Modal, Offline };
 
