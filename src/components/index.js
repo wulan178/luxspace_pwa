@@ -4,5 +4,6 @@ import Browser from "./Browser";
 import Clients from "./Clients";
 import Header from "./Header";
 import Hero from "./Hero";
+import Modal from "./Modal";
 
-export { Header, Hero, Browser, Arrived, Clients, AsideMenu };
+export { Header, Hero, Browser, Arrived, Clients, AsideMenu, Modal };
