@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Arrived, AsideMenu, Browser, Clients, Header, Hero, Offline } from "./components";
+import { Splash } from "./pages";
 
 function App() {
     const [items, setItems] = useState([]);
     const [offlineStatus, setOfflineStatus] = useState(!navigator.onLine);
+    const [isLoading, setIsLoading] = useState(true);
 
     function handleOfflineStatus() {
         setOfflineStatus(!navigator.onLine);
@@ -32,6 +34,10 @@ function App() {
         window.addEventListener("online", handleOfflineStatus);
         window.addEventListener("offline", handleOfflineStatus);
 
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 1500);
+
         return function () {
             window.removeEventListener("online", handleOfflineStatus);
             window.removeEventListener("offline", handleOfflineStatus);
@@ -40,13 +46,19 @@ function App() {
 
     return (
         <>
-            {offlineStatus && <Offline />}
-            <Header />
-            <Hero />
-            <Browser />
-            <Arrived items={items} />
-            <Clients />
-            <AsideMenu />
+            {isLoading === true ? (
+                <Splash />
+            ) : (
+                <>
+                    {offlineStatus && <Offline />}
+                    <Header />
+                    <Hero />
+                    <Browser />
+                    <Arrived items={items} />
+                    <Clients />
+                    <AsideMenu />
+                </>
+            )}
         </>
     );
 }
