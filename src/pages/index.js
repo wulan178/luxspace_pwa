@@ -1,4 +1,5 @@
+import Details from "./Details";
 import Profile from "./Profile";
 import Splash from "./Splash";
 
-export { Splash, Profile };
+export { Splash, Profile, Details };

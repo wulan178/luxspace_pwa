@@ -1,15 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { numberFormat } from "../../utils/formatter";
 
 export default function ArrivedItem({ item }) {
-    function numberFormat(price) {
-        const currency = Intl.NumberFormat("id-ID", {
-            style: "currency",
-            currency: "IDR",
-        });
-
-        return currency.format(price);
-    }
-
     return (
         <div className="px-4 relative card group">
             <div className="rounded-xl overflow-hidden card-shadow relative" style={{ width: "287px", height: "386px" }}>
@@ -25,7 +18,7 @@ export default function ArrivedItem({ item }) {
             </div>
             <h5 className="text-lg font-semibold mt-4">{item.name}</h5>
             <span className="">{numberFormat(item.price)}</span>
-            <a href="/details" className="stretched-link" />
+            <Link to={`/details/${item.id}`} state={item} className="stretched-link" />
         </div>
     );
 }

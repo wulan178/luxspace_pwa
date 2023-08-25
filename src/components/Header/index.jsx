@@ -1,13 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function Header() {
+export default function Header({ mode }) {
     return (
-        <header className="absolute w-full z-40 px-4">
+        <header className={`${mode === "light" ? "absolute" : ""} w-full z-40 px-4`}>
             <div className="container mx-auto py-5">
                 <div className="flex flex-stretch items-center">
                     <div className="w-56 items-center flex">
-                        <img src="images/content/logo.png" alt="Luxspace | Fulfill your house with beautiful furniture" />
+                        <img src="../../images/content/logo.png" alt="Luxspace | Fulfill your house with beautiful furniture" />
                     </div>
                     <div className="w-full"></div>
                     <div className="w-auto">
@@ -16,22 +16,22 @@ export default function Header() {
                             id="menu"
                         >
                             <li className="mx-3 py-6 md:py-0">
-                                <a href="/" className="text-black md:text-white hover:underline">
+                                <a href="/" className={`text-black ${mode === "light" ? "md:text-white" : "md:text-black"} hover:underline`}>
                                     Showcase
                                 </a>
                             </li>
                             <li className="mx-3 py-6 md:py-0">
-                                <a href="/" className="text-black md:text-white hover:underline">
+                                <a href="/" className={`text-black ${mode === "light" ? "md:text-white" : "md:text-black"} hover:underline`}>
                                     Catalog
                                 </a>
                             </li>
                             <li className="mx-3 py-6 md:py-0">
-                                <a href="/" className="text-black md:text-white hover:underline">
+                                <a href="/" className={`text-black ${mode === "light" ? "md:text-white" : "md:text-black"} hover:underline`}>
                                     Delivery
                                 </a>
                             </li>
                             <li className="mx-3 py-6 md:py-0">
-                                <Link to="/profile" className="text-black md:text-white hover:underline">
+                                <Link to="/profile" className={`text-black ${mode === "light" ? "md:text-white" : "md:text-black"} hover:underline`}>
                                     Profile
                                 </Link>
                             </li>

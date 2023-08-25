@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Arrived, AsideMenu, Browser, Clients, Header, Hero, Offline } from "./components";
-import { Profile, Splash } from "./pages";
+import { Arrived, AsideMenu, Browser, Clients, Footer, Header, Hero, Offline } from "./components";
+import { Details, Profile, Splash } from "./pages";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
@@ -60,6 +60,7 @@ function App() {
                     <Arrived items={items} />
                     <Clients />
                     <AsideMenu />
+                    <Footer />
                 </>
             )}
         </>
@@ -70,8 +71,9 @@ export default function AppRoutes() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<App />} />
+                <Route path="/" element={<App mode="light" />} />
                 <Route path="/profile" element={<Profile />} />
+                <Route path="/details/:id" element={<Details />} />
             </Routes>
         </BrowserRouter>
     );
