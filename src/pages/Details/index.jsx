@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { AsideMenu, Breadcrumb, Footer, Header } from "../../components";
 import { useLocation } from "react-router-dom";
 import { numberFormat } from "../../utils/formatter";
@@ -7,12 +7,13 @@ export default function Details() {
     const location = useLocation();
     const { name, price, description, image1, image2, image3, image4, image5 } = location?.state;
 
-    console.log(name);
+    const [currentImage, setCurrentImage] = useState(image1);
 
     return (
         <>
             <Header mode="dark" />
             <Breadcrumb />
+
             <section className="container mx-auto">
                 <div className="flex flex-wrap my-4 md:my-12">
                     <div className="w-full md:hidden px-4">
@@ -23,34 +24,34 @@ export default function Details() {
                         <div className="slider">
                             <div className="thumbnail">
                                 <div className="px-2">
-                                    <div className="item selected" data-img={image1}>
+                                    <div className={`item ${currentImage === image1 && 'selected'}`} onClick={()=>setCurrentImage(image1)}>
                                         <img src={image1} alt="front" className="object-cover w-full h-full rounded-lg" />
                                     </div>
                                 </div>
                                 <div className="px-2">
-                                    <div className="item" data-img={image2}>
+                                    <div className={`item ${currentImage === image2 && 'selected'}`} onClick={()=>setCurrentImage(image2)}>
                                         <img src={image2} alt="back" className="object-cover w-full h-full rounded-lg" />
                                     </div>
                                 </div>
                                 <div className="px-2">
-                                    <div className="item" data-img={image3}>
+                                    <div className={`item ${currentImage === image3 && 'selected'}`} onClick={()=>setCurrentImage(image3)}>
                                         <img src={image3} alt="rear" className="object-cover w-full h-full rounded-lg" />
                                     </div>
                                 </div>
                                 <div className="px-2">
-                                    <div className="item" data-img={image4}>
+                                    <div className={`item ${currentImage === image4 && 'selected'}`} onClick={()=>setCurrentImage(image4)}>
                                         <img src={image4} alt="side" className="object-cover w-full h-full rounded-lg" />
                                     </div>
                                 </div>
                                 <div className="px-2">
-                                    <div className="item" data-img={image5}>
+                                    <div className={`item ${currentImage === image5 && 'selected'}`} onClick={()=>setCurrentImage(image5)}>
                                         <img src={image5} alt="top" className="object-cover w-full h-full rounded-lg" />
                                     </div>
                                 </div>
                             </div>
                             <div className="preview">
                                 <div className="item rounded-lg h-full overflow-hidden">
-                                    <img src={image1} alt="front" className="object-cover w-full h-full rounded-lg" />
+                                    <img src={currentImage} alt="front" className="object-cover w-full h-full rounded-lg" />
                                 </div>
                             </div>
                         </div>
