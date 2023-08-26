@@ -20,17 +20,17 @@ export default function Cart({ cart, handleRemoveCartItem }) {
                             <div className="border-b border-gray-200 mb-4 hidden md:block">
                                 <div className="flex flex-start items-center pb-2 -mx-4">
                                     <div className="px-4 flex-none">
-                                        <div className="" style={{ width: "90px" }}>
+                                        <div style={{ width: "90px" }}>
                                             <h6>Photo</h6>
                                         </div>
                                     </div>
                                     <div className="px-4 w-5/12">
-                                        <div className="">
+                                        <div>
                                             <h6>Product</h6>
                                         </div>
                                     </div>
                                     <div className="px-4 w-5/12">
-                                        <div className="">
+                                        <div>
                                             <h6>Price</h6>
                                         </div>
                                     </div>
@@ -55,12 +55,12 @@ export default function Cart({ cart, handleRemoveCartItem }) {
                                 cart.map((item, index) => (
                                     <div key={index} className="flex flex-start flex-wrap items-center mb-4 -mx-4" data-row="1">
                                         <div className="px-4 flex-none">
-                                            <div className="" style={{ width: "90px", height: "90px" }}>
+                                            <div style={{ width: "90px", height: "90px" }}>
                                                 <img src={item.image1} alt="chair-1" className="object-cover rounded-xl w-full h-full" />
                                             </div>
                                         </div>
                                         <div className="px-4 w-auto flex-1 md:w-5/12">
-                                            <div className="">
+                                            <div>
                                                 <h6 className="font-semibold text-lg md:text-xl leading-8">{item.name}</h6>
                                                 <span className="text-sm md:text-lg">Office Room</span>
                                                 <h6 className="font-semibold text-base md:text-lg block md:hidden">
@@ -69,7 +69,7 @@ export default function Cart({ cart, handleRemoveCartItem }) {
                                             </div>
                                         </div>
                                         <div className="px-4 w-auto flex-none md:flex-1 md:w-5/12 hidden md:block">
-                                            <div className="">
+                                            <div>
                                                 <h6 className="font-semibold text-lg">{item.price > 0 ? numberFormat(item.price) : 0}</h6>
                                             </div>
                                         </div>

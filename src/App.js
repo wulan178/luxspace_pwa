@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Arrived, AsideMenu, Browser, Clients, Footer, Header, Hero, Offline } from "./components";
 import { Cart, Details, Profile, Splash } from "./pages";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App({ cart }) {
     const [items, setItems] = useState([]);
-    const [offlineStatus, setOfflineStatus] = useState(!navigator.onLine);
     const [isLoading, setIsLoading] = useState(true);
+    const [offlineStatus, setOfflineStatus] = useState(!navigator.onLine);
 
     function handleOfflineStatus() {
         setOfflineStatus(!navigator.onLine);

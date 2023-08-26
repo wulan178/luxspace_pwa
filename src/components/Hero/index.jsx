@@ -12,7 +12,7 @@ export default function Hero() {
         <section className="flex items-center hero">
             <div className="w-full absolute z-20 inset-0 md:relative md:w-1/2 text-center flex flex-col justify-center hero-caption">
                 <h1 className="text-3xl md:text-5xl leading-tight font-semibold">
-                    The Room <br className="" />
+                    The Room <br />
                     You've Dreaming
                 </h1>
                 <h2 className="px-8 text-base md:px-0 md:text-lg my-6 tracking-wide">

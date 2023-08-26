@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 export default function Profile() {
     function urlB64ToUint8Array(base64String) {
         const padding = "=".repeat((4 - (base64String.length % 4)) % 4);
+        // eslint-disable-next-line no-useless-escape
         const base64 = (base64String + padding).replace(/\-/g, "+").replace(/_/g, "/");
 
         const rawData = window.atob(base64);
@@ -123,7 +124,7 @@ export default function Profile() {
                 </div>
             </section>
 
-            <section className="">
+            <section>
                 <div className="container mx-auto min-h-screen">
                     <div className="flex flex-col items-center justify-center">
                         <div className="w-full md:w-4/12 text-center">

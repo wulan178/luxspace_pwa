@@ -17,7 +17,7 @@ export default function ArrivedItem({ item }) {
                 <img src={item.image1} alt="" className="w-full h-full object-cover object-center" />
             </div>
             <h5 className="text-lg font-semibold mt-4">{item.name}</h5>
-            <span className="">{numberFormat(item.price)}</span>
+            <span>{numberFormat(item.price)}</span>
             <Link to={`/details/${item.id}`} state={item} className="stretched-link" />
         </div>
     );

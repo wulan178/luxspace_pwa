@@ -1,13 +1,30 @@
-import React, { useState } from "react";
-import { AsideMenu, Breadcrumb, Footer, Header } from "../../components";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { AsideMenu, Breadcrumb, Footer, Header } from "../../components";
 import { numberFormat } from "../../utils/formatter";
+import { detailsAltImg, detailsOtherItems } from "../../utils/constants";
 
 export default function Details({ handleAddToCart, cart }) {
     const location = useLocation();
     const { name, price, description, image1, image2, image3, image4, image5 } = location?.state;
 
+    const [thumbnails, setThumbnails] = useState([]);
     const [currentImage, setCurrentImage] = useState(image1);
+
+    useEffect(() => {
+        if (location?.state) {
+            const imgArray = [image1, image2, image3, image4, image5];
+            let newArray = [];
+            for (let i = 0; i < imgArray.length; i++) {
+                newArray.push({
+                    img: imgArray[i],
+                    alt: detailsAltImg[i],
+                });
+            }
+            setThumbnails(newArray);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <>
@@ -20,34 +37,19 @@ export default function Details({ handleAddToCart, cart }) {
                         <h2 className="text-5xl font-semibold">{name}</h2>
                         <span className="text-xl">{numberFormat(price ? price : 0)}</span>
                     </div>
-                    <div className="flex-1">
+                    <div className="flex-1 px-4 md:px-10">
                         <div className="slider">
                             <div className="thumbnail">
-                                <div className="px-2">
-                                    <div className={`item ${currentImage === image1 && "selected"}`} onClick={() => setCurrentImage(image1)}>
-                                        <img src={image1} alt="front" className="object-cover w-full h-full rounded-lg" />
+                                {thumbnails?.map((thumbnail, i) => (
+                                    <div key={i} className="px-2">
+                                        <div
+                                            className={`item ${currentImage === thumbnail.img && "selected"}`}
+                                            onClick={() => setCurrentImage(thumbnail.img)}
+                                        >
+                                            <img src={thumbnail.img} alt={thumbnail.img} className="object-cover w-full h-full rounded-lg" />
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="px-2">
-                                    <div className={`item ${currentImage === image2 && "selected"}`} onClick={() => setCurrentImage(image2)}>
-                                        <img src={image2} alt="back" className="object-cover w-full h-full rounded-lg" />
-                                    </div>
-                                </div>
-                                <div className="px-2">
-                                    <div className={`item ${currentImage === image3 && "selected"}`} onClick={() => setCurrentImage(image3)}>
-                                        <img src={image3} alt="rear" className="object-cover w-full h-full rounded-lg" />
-                                    </div>
-                                </div>
-                                <div className="px-2">
-                                    <div className={`item ${currentImage === image4 && "selected"}`} onClick={() => setCurrentImage(image4)}>
-                                        <img src={image4} alt="side" className="object-cover w-full h-full rounded-lg" />
-                                    </div>
-                                </div>
-                                <div className="px-2">
-                                    <div className={`item ${currentImage === image5 && "selected"}`} onClick={() => setCurrentImage(image5)}>
-                                        <img src={image5} alt="top" className="object-cover w-full h-full rounded-lg" />
-                                    </div>
-                                </div>
+                                ))}
                             </div>
                             <div className="preview">
                                 <div className="item rounded-lg h-full overflow-hidden">
@@ -76,56 +78,31 @@ export default function Details({ handleAddToCart, cart }) {
                         <hr className="my-8" />
 
                         <h6 className="text-xl font-semibold mb-4">About the product</h6>
-                        <p className="text-xl leading-7 mb-6">{description}</p>
+                        <div className="text-xl leading-7 mb-6" dangerouslySetInnerHTML={{ __html: description }} />
                     </div>
                 </div>
             </section>
 
-            <section className="bg-gray-100 px-4 py-16">
+            <section className="bg-gray-100 px-4 py-16 md:px-10">
                 <div className="container mx-auto">
-                    <div className="flex flex-start mb-4">
+                    <div className="flex flex-start mb-6">
                         <h3 className="text-2xl capitalize font-semibold">
-                            Complete your room <br className="" />
+                            Complete your room <br />
                             with what we designed
                         </h3>
                     </div>
-                    <div className="flex overflow-x-auto mb-4 -mx-3">
-                        <div className="px-3 flex-none" style={{ width: "320px" }}>
-                            <div className="rounded-xl p-4 pb-8 relative bg-white">
-                                <div className="rounded-xl overflow-hidden card-shadow w-full h-36">
-                                    <img src="/images/content/chair-1.png" alt="" className="w-full h-full object-cover object-center" />
+                    <div className="flex overflow-x-auto mb-4 -mx-3 md:pb-8">
+                        {detailsOtherItems.map((item, i) => (
+                            <div key={i} className="px-3 flex-none min-w-max w-[132px]">
+                                <div className="rounded-xl p-4 pb-8 relative bg-white">
+                                    <div className="rounded-xl overflow-hidden card-shadow w-full h-36">
+                                        <img src={`/images/content/${item.img}`} alt="" className="w-full h-full object-cover object-center" />
+                                    </div>
+                                    <h5 className="text-lg font-semibold mt-4">{item.name}</h5>
+                                    <span>{numberFormat(item.price)}</span>
                                 </div>
-                                <h5 className="text-lg font-semibold mt-4">Cangkir Mauttie</h5>
-                                <span className="">IDR 89.300.000</span>
                             </div>
-                        </div>
-                        <div className="px-3 flex-none" style={{ width: "320px" }}>
-                            <div className="rounded-xl p-4 pb-8 relative bg-white">
-                                <div className="rounded-xl overflow-hidden card-shadow w-full h-36">
-                                    <img src="/images/content/chair-2.png" alt="" className="w-full h-full object-cover object-center" />
-                                </div>
-                                <h5 className="text-lg font-semibold mt-4">Saman Kakka</h5>
-                                <span className="">IDR 14.500.399</span>
-                            </div>
-                        </div>
-                        <div className="px-3 flex-none" style={{ width: "320px" }}>
-                            <div className="rounded-xl p-4 pb-8 relative bg-white">
-                                <div className="rounded-xl overflow-hidden card-shadow w-full h-36">
-                                    <img src="/images/content/chair-3.png" alt="" className="w-full h-full object-cover object-center" />
-                                </div>
-                                <h5 className="text-lg font-semibold mt-4">Lino Dino</h5>
-                                <span className="">IDR 22.000.000</span>
-                            </div>
-                        </div>
-                        <div className="px-3 flex-none" style={{ width: "320px" }}>
-                            <div className="rounded-xl p-4 pb-8 relative bg-white">
-                                <div className="rounded-xl overflow-hidden card-shadow w-full h-36">
-                                    <img src="/images/content/chair-1.png" alt="" className="w-full h-full object-cover object-center" />
-                                </div>
-                                <h5 className="text-lg font-semibold mt-4">Syail Ammeno</h5>
-                                <span className="">IDR 6.399.999</span>
-                            </div>
-                        </div>
+                        ))}
                     </div>
                 </div>
             </section>
