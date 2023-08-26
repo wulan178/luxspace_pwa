@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Arrived, AsideMenu, Browser, Clients, Footer, Header, Hero, Offline } from "./components";
-import { Details, Profile, Splash } from "./pages";
+import { Cart, Details, Profile, Splash } from "./pages";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-function App() {
+function App({ cart }) {
     const [items, setItems] = useState([]);
     const [offlineStatus, setOfflineStatus] = useState(!navigator.onLine);
     const [isLoading, setIsLoading] = useState(true);
@@ -54,7 +54,7 @@ function App() {
             ) : (
                 <>
                     {offlineStatus && <Offline />}
-                    <Header />
+                    <Header mode="light" cart={cart} />
                     <Hero />
                     <Browser />
                     <Arrived items={items} />
@@ -68,12 +68,35 @@ function App() {
 }
 
 export default function AppRoutes() {
+    const cachedCart = window.localStorage.getItem("cart");
+    const [cart, setCart] = useState([]);
+
+    function handleAddToCart(item) {
+        const currentIndex = cart.length;
+        const newCart = [...cart, { id: currentIndex + 1, item }];
+        setCart(newCart);
+        window.localStorage.setItem("cart", JSON.stringify(newCart));
+    }
+
+    function handleRemoveCartItem(event, id) {
+        const revisedCart = cart.filter((item) => item.id !== id);
+        setCart(revisedCart);
+        window.localStorage.setItem("cart", JSON.stringify(revisedCart));
+    }
+
+    useEffect(() => {
+        if (cachedCart !== null) {
+            setCart(JSON.parse(cachedCart));
+        }
+    }, [cachedCart]);
+
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<App mode="light" />} />
+                <Route path="/" element={<App cart={cart} />} />
                 <Route path="/profile" element={<Profile />} />
-                <Route path="/details/:id" element={<Details />} />
+                <Route path="/details/:id" element={<Details handleAddToCart={handleAddToCart} cart={cart} />} />
+                <Route path="/cart" element={<Cart cart={cart} handleRemoveCartItem={handleRemoveCartItem} />} />
             </Routes>
         </BrowserRouter>
     );
