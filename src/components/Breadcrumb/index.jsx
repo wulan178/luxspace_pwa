@@ -4,7 +4,7 @@ import { breadcrumb } from "../../utils/constants";
 
 export default function Breadcrumb() {
     return (
-        <section className="bg-gray-100 py-8 px-4">
+        <section className="bg-gray-100 py-8 px-4 md:px-6">
             <div className="container mx-auto">
                 <ul className="breadcrumb">
                     {breadcrumb.map((item, i) => (
