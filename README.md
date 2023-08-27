@@ -1,4 +1,4 @@
-# LuxSpace (Progressive Web App)
+# LuxSpace (PWA)
 
 This is a dummy Ecommerce website project created using React.js and Tailwind CSS with PWA (Progressive Web App) features. The project was developed as part of a course offered by BuildWithAngga. 
 
